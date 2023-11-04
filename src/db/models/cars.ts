@@ -3,6 +3,7 @@ import { ModelObject, Model } from 'objection';
 export class CarsModel extends Model {
     id!: number;
     plate!: string;
+    manufacture!: string;
     model!: string;
     image!: string;
     rentPerDay!: number;
@@ -12,6 +13,7 @@ export class CarsModel extends Model {
     transmission!: string;
     available!: boolean;
     type!: string;
+    year!: number;
     options!: string;
     specs!: string;
 
