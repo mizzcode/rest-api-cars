@@ -4,7 +4,10 @@
   "description": "Build REST API Cars Management",
   "scripts": {
     "build": "npx tsc",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
+    "migrate": "npx knex migrate:latest --knexfile src/config/knexfile.ts",
+    "migrate:down": "npx knex migrate:down --knexfile src/config/knexfile.ts",
+    "seed": "npx knex seed:run --knexfile src/config/knexfile.ts"
   },
   "repository": {
     "type": "git",
