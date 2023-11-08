@@ -7,19 +7,19 @@ $ npm install
 $ npm run dev # run development!
 ```
 
+## Database
+
+```
+$ docker compose up -d # run database
+$ docker compose down -v # delete database and the volume
+```
+
 ## Scripts
 
 ```
 $ npm run build # build typescript project
 $ npm run dev # run in development mode
 $ npm run setup # run migration, seeder
-```
-
-## Database
-
-```
-$ docker compose up -d # run database
-$ docker compose down -v # delete database and the volume
 ```
 
 ## Entity Relationship Diagram
