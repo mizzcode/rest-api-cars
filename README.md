@@ -21,13 +21,10 @@ $ docker compose up -d # run database
 $ docker compose down -v # delete database and the volume
 ```
 
-### Config knex
+### Config knex setup database
 
 ```
-$ npx knex migrate:make namaMigration --knexfile src/config/knexfile.ts # membuat migration
-$ npm run migrate # menjalankan migration
-$ npx knex seed:make namaSeed --knexfile src/config/knexfile.ts # membuat seed
-$ npm run seed # menjalankan seed
+$ npm run setup # run migration, seeder
 ```
 
 ## Entity Relationship Diagram
