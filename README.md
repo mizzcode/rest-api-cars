@@ -12,6 +12,7 @@ $ npm run dev # run development!
 ```
 $ npm run build # build typescript project
 $ npm run dev # run in development mode
+$ npm run setup # run migration, seeder
 ```
 
 ## Database
@@ -19,12 +20,6 @@ $ npm run dev # run in development mode
 ```
 $ docker compose up -d # run database
 $ docker compose down -v # delete database and the volume
-```
-
-### Config knex setup database
-
-```
-$ npm run setup # run migration, seeder
 ```
 
 ## Entity Relationship Diagram
