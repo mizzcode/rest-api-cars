@@ -179,14 +179,14 @@ Response :
 ```json 
 {
     "id": 26,
-    "plate": "J 026 BKS",
+    "plate": "M 003 TGL",
     "manufacture": "BMW",
     "model": "X5",
     "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
-    "rentPerDay": 950000,
-    "capacity": 2,
+    "rentPerDay": 550000,
+    "capacity": 4,
     "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
-    "availableAt": "2023-11-08T16:53:02.134Z",
+    "availableAt": "2023-11-08T17:18:52.195Z",
     "transmission": "Automatic",
     "available": true,
     "type": "Sedan",
