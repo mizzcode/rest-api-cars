@@ -31,7 +31,7 @@ $ npm run setup # run migration, seeder
 
 Request :
 - Method : POST
-- Endpoint : `/cars`
+- Endpoint : `/api/v1/cars`
 - Header :
     - Content-Type: application/json
     - Accept: application/json
@@ -87,7 +87,7 @@ Response :
 
 Request :
 - Method : GET
-- Endpoint : `/cars`
+- Endpoint : `/api/v1/cars`
 - Header :
     - Accept: application/json
 
@@ -165,7 +165,7 @@ Response :
 
 Request :
 - Method : GET
-- Endpoint : `/cars/:id`
+- Endpoint : `/api/v1/cars/:id`
 - Header :
     - Accept: application/json
 
@@ -208,7 +208,7 @@ Response :
 
 Request :
 - Method : PATCH
-- Endpoint : `/cars/:id`
+- Endpoint : `/api/v1/cars/:id`
 - Header :
     - Content-Type: application/json
     - Accept: application/json
@@ -236,7 +236,7 @@ Response :
 
 Request :
 - Method : DELETE
-- Endpoint : `/cars`
+- Endpoint : `/api/v1/cars`
 - Header :
     - Accept: application/json
 
@@ -254,7 +254,7 @@ Response :
 
 Request :
 - Method : DELETE
-- Endpoint : `/cars/:id`
+- Endpoint : `/api/v1/cars/:id`
 - Header :
     - Accept: application/json
 
