@@ -1,0 +1,374 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.bg-blue {
+  background-color: #f1f3ff;
+}
+
+.navbar {
+  height: 80px;
+}
+
+.logo {
+  padding: 20px;
+  width: 7rem;
+  background-color: #0d28a6;
+}
+
+.nav-link {
+  border-radius: 4px;
+}
+
+.nav-link:hover {
+  transition: all 0.8s;
+  color: white !important;
+  background-color: #0d28a6;
+}
+
+.btn {
+  border-radius: 4px;
+  background-color: #5cb85f !important;
+}
+
+.btn a {
+  color: #fff !important;
+}
+
+.btn:hover {
+  transition: all 0.6s;
+  box-shadow: 2px 4px 0px #0113d4;
+}
+
+.offcanvas-body ul {
+  list-style-type: none;
+  padding-inline: 0;
+}
+
+.offcanvas-button {
+  border: none;
+  background-color: transparent;
+}
+
+main {
+  margin-top: 5rem;
+}
+
+#cover-img {
+  margin-top: 2rem;
+  padding-right: 0;
+  display: flex;
+  align-items: flex-end;
+}
+
+a {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+#our-services {
+  margin-top: 6rem;
+}
+
+.our-service-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#our-services ul {
+  padding-left: 0;
+}
+
+#our-services li {
+  list-style-type: none;
+  padding-inline: 40px;
+  background: url('../icons/list_bullet.png') left;
+  background-repeat: no-repeat;
+  line-height: 2.5rem;
+}
+
+#why-us {
+  margin-top: 6rem;
+}
+
+#testimonial {
+  margin-top: 6rem;
+}
+
+.carousel-item {
+  width: 100%;
+  background-color: #f1f3ff;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+#testimonial p {
+  margin-top: 1rem;
+}
+
+.prev-button {
+  background-color: white;
+  border: 1px solid gray;
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 2rem 0.5rem;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.next-button {
+  background-color: #5cb85f;
+  border: 1px solid #5cb85f;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+#getting-started {
+  margin-top: 6rem;
+  background-color: #0d28a6;
+  color: white;
+  border-radius: 10px;
+}
+
+#getting-started h2 {
+  margin-bottom: 2rem;
+}
+
+#faq {
+  margin-top: 6rem;
+}
+
+#faq p {
+  margin-block: 2rem;
+}
+
+.accordion-item {
+  border: 1px solid rgb(216, 214, 214) !important;
+  margin-bottom: 1rem;
+}
+
+#jumbotron {
+  position: relative;
+}
+
+#search {
+  position: absolute;
+  bottom: -3.5rem;
+  right: 15rem;
+}
+
+#result {
+  margin-top: 7rem;
+}
+/* select, input */
+#driver,
+#date,
+#pickupTime,
+#totalPassenger {
+  width: 18.3rem;
+  margin-top: 0.5rem;
+}
+/* button */
+#cariMobil {
+  margin-top: 0.5rem;
+}
+
+.car img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.car i {
+  position: relative;
+  top: 0.3rem;
+}
+.car p {
+  margin-bottom: 0.3rem !important;
+}
+/* icon */
+.fi-users {
+  background: url('../icons/fi_users.svg');
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  margin-top: 0.5rem;
+  height: 20px;
+  width: 23px;
+}
+.fi-settings {
+  background: url('../icons/fi_settings.svg');
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  margin-top: 0.5rem;
+  height: 20px;
+  width: 23px;
+}
+.fi-calendar {
+  background: url('../icons/fi_calendar.svg');
+  background-repeat: no-repeat;
+
+  display: inline-block;
+  margin-top: 0.5rem;
+  height: 20px;
+  width: 23px;
+}
+
+footer {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+.alert {
+  width: 100% !important;
+  padding: 2rem !important;
+}
+
+@media only screen and (max-width: 1440px) {
+  #search {
+    bottom: -4.5rem;
+    right: 11rem;
+    width: 72%;
+  }
+  /* input, select */
+  #driver,
+  #date,
+  #pickupTime,
+  #totalPassenger {
+    width: 10rem;
+  }
+  .car img {
+    height: 200px;
+    object-fit: cover;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #search {
+    z-index: 2;
+    bottom: -12rem;
+    right: 8.5rem;
+  }
+  /* input, select */
+  #driver,
+  #date,
+  #pickupTime {
+    width: 11rem;
+    margin-bottom: 1rem;
+  }
+  #totalPassenger {
+    width: 11rem;
+    margin-left: 0.3rem;
+  }
+
+  #result {
+    position: relative;
+    top: 10rem;
+  }
+
+  .footerCars {
+    position: relative;
+    top: 5rem;
+    margin-bottom: 7rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  #search {
+    bottom: -13rem;
+    right: 7rem;
+  }
+
+  #cariMobil {
+    margin-bottom: 1rem;
+  }
+}
+@media only screen and (max-width: 805px) {
+  #search {
+    bottom: -19rem;
+    right: 7rem;
+  }
+
+  /* input, select */
+  #driver,
+  #date,
+  #pickupTime {
+    width: 11rem;
+    margin-bottom: 1rem;
+    margin-left: 0rem;
+  }
+  #totalPassenger {
+    width: 11rem;
+    margin-left: 0rem;
+  }
+
+  #cariMobil {
+    margin-bottom: 1rem;
+  }
+
+  .footerCars {
+    top: 12rem;
+    margin-bottom: 14rem;
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  .rater-text img {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  #search {
+    bottom: -20rem;
+  }
+
+  #result {
+    position: relative;
+    top: 16rem;
+  }
+}
+
+@media only screen and (min-width: 770px) {
+  .rater-img {
+    margin-top: 2rem;
+    width: 25%;
+  }
+  .rater-text {
+    width: 75%;
+  }
+}
+@media only screen and (max-width: 570px) {
+  #search {
+    bottom: -27rem;
+    right: 3.5rem;
+  }
+
+  #date {
+    margin-left: 0;
+  }
+
+  #totalPassenger {
+    width: 10.7rem;
+    margin-bottom: 1rem;
+  }
+
+  #cariMobil {
+    width: 10.7rem;
+    margin-left: 0.3rem;
+  }
+
+  #result {
+    position: relative;
+    top: 24rem;
+  }
+
+  .footerCars {
+    top: 23rem;
+    margin-bottom: 22rem;
+  }
+}

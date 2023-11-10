@@ -4,7 +4,18 @@ import config from './config/knexfile';
 import upload from './config/multer';
 import { Model } from 'objection';
 import knex from 'knex';
-import { deleteCar, deleteCarById, editCar, getAllCar, getDetailCar, routeNotFound, saveCar } from './handler';
+import {
+  deleteCar,
+  deleteCarById,
+  editCar,
+  getAllCar,
+  getDetailCar,
+  landingPage,
+  routeNotFound,
+  saveCar,
+  searchCars,
+} from './handler';
+import path from 'path';
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
@@ -12,22 +23,29 @@ const port = process.env.PORT || 4000;
 // connect db postgres client
 Model.knex(knex(config.development));
 
+app.set('views', path.join(process.cwd(), 'src', 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(process.cwd(), 'src', 'public')));
 app.use(express.json());
 
-app.post('/cars', upload.single('image'), saveCar);
+app.get('/', landingPage);
 
-app.get('/cars', getAllCar);
+app.get('/cars', searchCars);
 
-app.get('/cars/:id', getDetailCar);
+app.post('/api/v1/cars', upload.single('image'), saveCar);
 
-app.patch('/cars/:id', editCar);
+app.get('/api/v1/cars', getAllCar);
 
-app.delete('/cars', deleteCar);
+app.get('/api/v1/cars/:id', getDetailCar);
 
-app.delete('/cars/:id', deleteCarById);
+app.patch('/api/v1/cars/:id', editCar);
+
+app.delete('/api/v1/cars', deleteCar);
+
+app.delete('/api/v1/cars/:id', deleteCarById);
 
 app.all('*', routeNotFound);
 
 app.listen(port, () => {
-    console.log(`server listen on http://localhost:${port}`);
+  console.log(`server listen on http://localhost:${port}`);
 });
