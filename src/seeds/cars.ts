@@ -5,7 +5,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('cars').del();
 
   // Inserts seed entries
-  const cars = [
+  const body = [
     {
       id: '6e2bc663-5197-441a-957b-bc75e4a2da7c',
       plate: 'DBH-3491',
@@ -774,10 +774,33 @@ export async function seed(knex: Knex): Promise<void> {
     },
   ];
 
+  const getRandomInt = (min: number, max: number) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const populateCars = (cars: any) => {
+    return cars.map((car: any) => {
+      const isPositive = getRandomInt(0, 1) === 1;
+      const timeAt = new Date();
+      // date + 3 day
+      const mutator = getRandomInt(10_000_000, 300_000_000);
+      const availableAt = new Date(timeAt.getTime() + (isPositive ? mutator : -1 * mutator));
+
+      return {
+        ...car,
+        availableAt,
+      };
+    });
+  };
+
+  const cars = populateCars(body);
+
   // Inserts seed entries
   await knex('cars').insert(
-    // data id dan availableAt tidak kita masukan ke table cars
-    cars.map(({ id, availableAt, ...car }) => {
+    // data id tidak kita masukan ke table cars
+    cars.map(({ ...car }) => {
       return {
         ...car,
         // specs dan options kita jadikan string dulu
