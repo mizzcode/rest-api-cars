@@ -6,32 +6,11 @@ interface IParams {
   id: number;
 }
 interface IReqQuery {
-  driver: boolean;
+  driver: number;
   date: string;
   pickupTime: string;
   totalPassenger: number;
 }
-
-const getRandomInt = (min: number, max: number) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-const populateCars = (cars: any) => {
-  return cars.map((car: any) => {
-    const isPositive = getRandomInt(0, 1) === 1;
-    const timeAt = new Date();
-    // date + 3 day
-    const mutator = getRandomInt(10_000_000, 300_000_000);
-    const availableAt = new Date(timeAt.getTime() + (isPositive ? mutator : -1 * mutator));
-
-    return {
-      ...car,
-      availableAt,
-    };
-  });
-};
 
 // method format number to rupiah idr currency
 const rupiah = (number: number) => {
@@ -50,13 +29,15 @@ const landingPage = (_: Request, res: Response) => {
 const searchCars = async (req: Request<{}, {}, {}, IReqQuery>, res: Response) => {
   const { driver, date, pickupTime, totalPassenger } = req.query;
 
-  const cars = populateCars(await CarsModel.query());
+  const qCars = CarsModel.query();
 
-  const rentalDate = new Date(date + pickupTime).getTime();
+  if (date && pickupTime) {
+    const rentalDate = new Date(date + pickupTime);
 
-  const availableCars = cars.filter((car: any) => car.availableAt > rentalDate);
+    qCars.where('availableAt', '>', rentalDate).orderBy('availableAt');
+  }
 
-  console.log(availableCars);
+  const availableCars = await qCars;
 
   // mencari mobil dengan kapasitas terbesar
   const maxCarCapacity = Math.max(...availableCars.map((car: any) => car.capacity));
