@@ -799,7 +799,6 @@ export async function seed(knex: Knex): Promise<void> {
 
   // Inserts seed entries
   await knex('cars').insert(
-    // data id tidak kita masukan ke table cars
     cars.map(({ ...car }) => {
       return {
         ...car,
