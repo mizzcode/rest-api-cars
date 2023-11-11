@@ -23,7 +23,7 @@ $ npm run setup # run migration, seeder
 ```
 
 ## Entity Relationship Diagram
-![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/353916f1-7519-43ab-ad9a-f2b0328c44b9)
+![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/1757dfbb-9cf4-416b-ae73-f197353b10ff)
 
 # API Spec
 
