@@ -43,7 +43,7 @@ Request :
         "plate": "M 003 TGL",
         "manufacture": "BMW",
         "model": "X5",
-        "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
+        "image": "cars.jpg",
         "rentPerDay": 550000,
         "capacity": 4,
         "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
@@ -77,7 +77,7 @@ Response :
     "status": "Success",
     "message": "Car was added successfully!",
     "data": {
-        "carId": 26
+        "carId": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2"
     },
     "statusCode": 201
 }
@@ -93,10 +93,10 @@ Request :
 
 Response :
 
-```json 
+```json
 [
     {
-        "id": 25,
+        "id": "e76e884b-8f3e-4b90-a717-9239676d0191",
         "plate": "IDN-5442",
         "manufacture": "Honda",
         "model": "Civic",
@@ -104,7 +104,7 @@ Response :
         "rentPerDay": 1000000,
         "capacity": 2,
         "description": " Electric speed-sensitive variable-assist pwr steering. Steel side-door impact beams. Dual bright exhaust tips.",
-        "availableAt": "2023-11-08T14:41:15.571Z",
+        "availableAt": "2023-11-14T16:13:31.395Z",
         "transmission": "CVT",
         "available": false,
         "type": "Wagon",
@@ -129,7 +129,7 @@ Response :
         ]
     },
     {
-        "id": 26,
+        "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
         "plate": "M 003 TGL",
         "manufacture": "BMW",
         "model": "X5",
@@ -137,7 +137,7 @@ Response :
         "rentPerDay": 550000,
         "capacity": 4,
         "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
-        "availableAt": "2023-11-08T16:53:02.134Z",
+        "availableAt": "2023-11-12T07:17:56.057Z",
         "transmission": "Automatic",
         "available": true,
         "type": "Sedan",
@@ -173,7 +173,7 @@ Response :
 
 ```json 
 {
-    "id": 26,
+    "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
     "plate": "M 003 TGL",
     "manufacture": "BMW",
     "model": "X5",
