@@ -4,18 +4,9 @@ import config from './config/knexfile';
 import upload from './config/multer';
 import { Model } from 'objection';
 import knex from 'knex';
-import {
-  deleteCar,
-  deleteCarById,
-  editCar,
-  getAllCar,
-  getDetailCar,
-  landingPage,
-  routeNotFound,
-  saveCar,
-  searchCars,
-} from './handler';
 import path from 'path';
+import { CarService } from './services/CarService';
+import { routeNotFound } from './utils/routeNotFound';
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
@@ -28,21 +19,21 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(process.cwd(), 'src', 'public')));
 app.use(express.json());
 
-app.get('/', landingPage);
+app.get('/', CarService.landingPage);
 
-app.get('/cars', searchCars);
+app.get('/cars', CarService.searchCars);
 
-app.post('/api/v1/cars', upload.single('image'), saveCar);
+app.post('/api/v1/cars', upload.single('image'), CarService.saveCar);
 
-app.get('/api/v1/cars', getAllCar);
+app.get('/api/v1/cars', CarService.getAllCar);
 
-app.get('/api/v1/cars/:id', getDetailCar);
+app.get('/api/v1/cars/:id', CarService.getDetailCar);
 
-app.patch('/api/v1/cars/:id', editCar);
+app.patch('/api/v1/cars/:id', CarService.editCar);
 
-app.delete('/api/v1/cars', deleteCar);
+app.delete('/api/v1/cars', CarService.deleteCar);
 
-app.delete('/api/v1/cars/:id', deleteCarById);
+app.delete('/api/v1/cars/:id', CarService.deleteCarById);
 
 app.all('*', routeNotFound);
 
