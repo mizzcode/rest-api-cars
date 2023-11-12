@@ -23,6 +23,7 @@ $ npm run setup # run migration, seeder
 ```
 
 ## Entity Relationship Diagram
+
 ![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/1757dfbb-9cf4-416b-ae73-f197353b10ff)
 
 # API Spec
@@ -30,149 +31,99 @@ $ npm run setup # run migration, seeder
 ## Create Car
 
 Request :
+
 - Method : POST
 - Endpoint : `/api/v1/cars`
 - Header :
-    - Content-Type: application/json
-    - Accept: application/json
+  - Content-Type: application/json
+  - Accept: application/json
 - Body :
 
-```json 
+```json
 {
-    {
-        "plate": "M 003 TGL",
-        "manufacture": "BMW",
-        "model": "X5",
-        "image": "cars.jpg",
-        "rentPerDay": 550000,
-        "capacity": 4,
-        "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
-        "transmission": "Automatic",
-        "available": true,
-        "type": "Sedan",
-        "year": 2010,
-        "options": [
-            "Cruise Control",
-            "Tinted Glass",
-            "Tinted Glass",
-            "Tinted Glass",
-            "AM/FM Stereo"
-        ],
-        "specs": [
-            "Brake assist",
-            "Leather-wrapped shift knob",
-            "Glove box lamp",
-            "Air conditioning w/in-cabin microfilter",
-            "Body color folding remote-controlled pwr mirrors",
-            "Dual-stage front airbags w/occupant classification system"
-        ]
-    }
+  "plate": "M 003 TGL",
+  "manufacture": "BMW",
+  "model": "X5",
+  "image": "cars.jpg",
+  "rentPerDay": 550000,
+  "capacity": 4,
+  "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
+  "transmission": "Automatic",
+  "available": true,
+  "type": "Sedan",
+  "year": 2010,
+  "options": ["Cruise Control", "Tinted Glass", "Tinted Glass", "Tinted Glass", "AM/FM Stereo"],
+  "specs": [
+    "Brake assist",
+    "Leather-wrapped shift knob",
+    "Glove box lamp",
+    "Air conditioning w/in-cabin microfilter",
+    "Body color folding remote-controlled pwr mirrors",
+    "Dual-stage front airbags w/occupant classification system"
+  ]
 }
 ```
 
 Response :
 
-```json 
+```json
 {
-    "status": "Success",
-    "message": "Car was added successfully!",
-    "data": {
-        "carId": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2"
-    },
-    "statusCode": 201
+  "status": "Success",
+  "message": "Car was added successfully!",
+  "data": {
+    "carId": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2"
+  },
+  "statusCode": 201
 }
 ```
 
 ## All Car
 
 Request :
+
 - Method : GET
 - Endpoint : `/api/v1/cars`
 - Header :
-    - Accept: application/json
+  - Accept: application/json
 
 Response :
 
 ```json
 [
-    {
-        "id": "e76e884b-8f3e-4b90-a717-9239676d0191",
-        "plate": "IDN-5442",
-        "manufacture": "Honda",
-        "model": "Civic",
-        "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
-        "rentPerDay": 1000000,
-        "capacity": 2,
-        "description": " Electric speed-sensitive variable-assist pwr steering. Steel side-door impact beams. Dual bright exhaust tips.",
-        "availableAt": "2023-11-14T16:13:31.395Z",
-        "transmission": "CVT",
-        "available": false,
-        "type": "Wagon",
-        "year": 2015,
-        "options": [
-            "CD (Single Disc)",
-            "Airbag: Passenger",
-            "A/C: Front",
-            "Power Locks",
-            "Navigation",
-            "Rear Window Defroster",
-            "Rear Window Defroster",
-            "MP3 (Single Disc)",
-            "Airbag: Side"
-        ],
-        "specs": [
-            "Electric speed-sensitive variable-assist pwr steering",
-            "Steel side-door impact beams",
-            "Dual bright exhaust tips",
-            "Remote fuel lid release",
-            "Traveler/mini trip computer"
-        ]
-    },
-    {
-        "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
-        "plate": "M 003 TGL",
-        "manufacture": "BMW",
-        "model": "X5",
-        "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
-        "rentPerDay": 550000,
-        "capacity": 4,
-        "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
-        "availableAt": "2023-11-12T07:17:56.057Z",
-        "transmission": "Automatic",
-        "available": true,
-        "type": "Sedan",
-        "year": 2010,
-        "options": [
-            "Cruise Control",
-            "Tinted Glass",
-            "Tinted Glass",
-            "Tinted Glass",
-            "AM/FM Stereo"
-        ],
-        "specs": [
-            "Brake assist",
-            "Leather-wrapped shift knob",
-            "Glove box lamp",
-            "Air conditioning w/in-cabin microfilter",
-            "Body color folding remote-controlled pwr mirrors",
-            "Dual-stage front airbags w/occupant classification system"
-        ]
-    }
-]
-```
-
-## Detail Car
-
-Request :
-- Method : GET
-- Endpoint : `/api/v1/cars/:id`
-- Header :
-    - Accept: application/json
-
-Response :
-
-```json 
-{
+  {
+    "id": "e76e884b-8f3e-4b90-a717-9239676d0191",
+    "plate": "IDN-5442",
+    "manufacture": "Honda",
+    "model": "Civic",
+    "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
+    "rentPerDay": 1000000,
+    "capacity": 2,
+    "description": " Electric speed-sensitive variable-assist pwr steering. Steel side-door impact beams. Dual bright exhaust tips.",
+    "availableAt": "2023-11-14T16:13:31.395Z",
+    "transmission": "CVT",
+    "available": false,
+    "type": "Wagon",
+    "year": 2015,
+    "options": [
+      "CD (Single Disc)",
+      "Airbag: Passenger",
+      "A/C: Front",
+      "Power Locks",
+      "Navigation",
+      "Rear Window Defroster",
+      "Rear Window Defroster",
+      "MP3 (Single Disc)",
+      "Airbag: Side"
+    ],
+    "specs": [
+      "Electric speed-sensitive variable-assist pwr steering",
+      "Steel side-door impact beams",
+      "Dual bright exhaust tips",
+      "Remote fuel lid release",
+      "Traveler/mini trip computer"
+    ]
+  },
+  {
     "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
     "plate": "M 003 TGL",
     "manufacture": "BMW",
@@ -181,89 +132,125 @@ Response :
     "rentPerDay": 550000,
     "capacity": 4,
     "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
-    "availableAt": "2023-11-08T17:18:52.195Z",
+    "availableAt": "2023-11-12T07:17:56.057Z",
     "transmission": "Automatic",
     "available": true,
     "type": "Sedan",
     "year": 2010,
-    "options": [
-        "Cruise Control",
-        "Tinted Glass",
-        "Tinted Glass",
-        "Tinted Glass",
-        "AM/FM Stereo"
-    ],
+    "options": ["Cruise Control", "Tinted Glass", "Tinted Glass", "Tinted Glass", "AM/FM Stereo"],
     "specs": [
-        "Brake assist",
-        "Leather-wrapped shift knob",
-        "Glove box lamp",
-        "Air conditioning w/in-cabin microfilter",
-        "Body color folding remote-controlled pwr mirrors",
-        "Dual-stage front airbags w/occupant classification system"
+      "Brake assist",
+      "Leather-wrapped shift knob",
+      "Glove box lamp",
+      "Air conditioning w/in-cabin microfilter",
+      "Body color folding remote-controlled pwr mirrors",
+      "Dual-stage front airbags w/occupant classification system"
     ]
+  }
+]
+```
+
+## Detail Car
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/v1/cars/:id`
+- Header :
+  - Accept: application/json
+
+Response :
+
+```json
+{
+  "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
+  "plate": "M 003 TGL",
+  "manufacture": "BMW",
+  "model": "X5",
+  "image": "https://res.cloudinary.com/dshomxqjc/image/upload/v1699341621/cars.jpg",
+  "rentPerDay": 550000,
+  "capacity": 4,
+  "description": " Brake assist. Leather-wrapped shift knob. Glove box lamp. Air conditioning w/in-cabin microfilter.",
+  "availableAt": "2023-11-08T17:18:52.195Z",
+  "transmission": "Automatic",
+  "available": true,
+  "type": "Sedan",
+  "year": 2010,
+  "options": ["Cruise Control", "Tinted Glass", "Tinted Glass", "Tinted Glass", "AM/FM Stereo"],
+  "specs": [
+    "Brake assist",
+    "Leather-wrapped shift knob",
+    "Glove box lamp",
+    "Air conditioning w/in-cabin microfilter",
+    "Body color folding remote-controlled pwr mirrors",
+    "Dual-stage front airbags w/occupant classification system"
+  ]
 }
 ```
 
 ## Update Car
 
 Request :
+
 - Method : PATCH
 - Endpoint : `/api/v1/cars/:id`
 - Header :
-    - Content-Type: application/json
-    - Accept: application/json
+  - Content-Type: application/json
+  - Accept: application/json
 - Body :
 
-```json 
+```json
 {
-    "plate": "J 026 BKS",
-    "rentPerDay": 950000,
-    "capacity": 2
+  "plate": "J 026 BKS",
+  "rentPerDay": 950000,
+  "capacity": 2
 }
 ```
 
 Response :
 
-```json 
+```json
 {
-    "status": "Success",
-    "message": "Car was updated successfully!",
-    "statusCode": 200
+  "status": "Success",
+  "message": "Car was updated successfully!",
+  "statusCode": 200
 }
 ```
 
 ## Delete All Car
 
 Request :
+
 - Method : DELETE
 - Endpoint : `/api/v1/cars`
 - Header :
-    - Accept: application/json
+  - Accept: application/json
 
 Response :
 
 ```json
 {
-    "status": "Success",
-    "message": "All Car deleted successfully!",
-    "statusCode": 200
+  "status": "Success",
+  "message": "All Car deleted successfully!",
+  "statusCode": 200
 }
 ```
 
 ## Delete Car By Id
 
 Request :
+
 - Method : DELETE
 - Endpoint : `/api/v1/cars/:id`
 - Header :
-    - Accept: application/json
+  - Accept: application/json
 
 Response :
 
-```json 
+```json
 {
-    "status": "Success",
-    "message": "Car was deleted successfully!",
-    "statusCode": 200
+  "status": "Success",
+  "message": "Car was deleted successfully!",
+  "statusCode": 200
 }
 ```
