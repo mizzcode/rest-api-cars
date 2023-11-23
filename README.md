@@ -20,6 +20,8 @@ $ docker compose down -v # delete database and the volume
 $ npm run build # build typescript project
 $ npm run dev # run in development mode
 $ npm run setup # run migration, seeder
+$ npm run knex migrate:make migration_name # create new file migration
+$ npm run knex seed:make seed_name # create new file seeds
 ```
 
 ## Entity Relationship Diagram

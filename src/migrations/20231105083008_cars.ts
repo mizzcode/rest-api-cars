@@ -17,6 +17,8 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('year').notNullable();
     table.json('options').notNullable();
     table.json('specs').notNullable();
+    table.string('created_by').defaultTo('seed');
+    table.string('updated_by').defaultTo('seed');
   });
 }
 
