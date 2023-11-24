@@ -25,7 +25,13 @@ export class UsersController {
 
       const user = await this.userService.saveUser(body);
 
-      return res.status(201).json({ user });
+      return res.status(201).json({
+        user: {
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        },
+      });
     } catch (err: any) {
       console.error(err);
       return res.status(409).json({ message: 'Email already exist' });
