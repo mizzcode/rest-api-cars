@@ -38,7 +38,7 @@ $ npm run knex seed:make seed_name # create new file seeds
 
 ## Entity Relationship Diagram
 
-![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/c225f685-cd29-4afd-b66b-ff33c1da3841)
+![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/7602d2ad-48e8-4a27-bda3-de4bc9f06361)
 
 # API Spec
 
