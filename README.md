@@ -3,8 +3,9 @@
 ## How to use?
 
 ```
-$ npm install
-$ npm run dev # run development!
+$ git clone https://github.com/mizzcode/rest-api-cars.git # get source code of the repository
+$ cp .env.example .env # copy file .env.example to .env
+$ npm install # install package
 ```
 
 ## Database
