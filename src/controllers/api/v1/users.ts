@@ -73,7 +73,7 @@ export class UsersController {
     } catch (err: any) {
       console.error(err);
       if (err.constraint === 'users_role_check') {
-        return res.status(422).json({ message: 'The value of role is not allowed' });
+        return res.status(400).json({ message: 'The value of role is not allowed' });
       }
       return res.status(409).json({ message: 'Email already exist' });
     }

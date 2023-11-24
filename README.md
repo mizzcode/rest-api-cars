@@ -24,11 +24,139 @@ $ npm run knex migrate:make migration_name # create new file migration
 $ npm run knex seed:make seed_name # create new file seeds
 ```
 
+## Account User
+
+```json
+{
+  "email": "mizz@gmail.com",
+  "name": "Misbah",
+  "password": "password",
+  "role": "superadmin"
+}
+```
+
 ## Entity Relationship Diagram
 
 ![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/c225f685-cd29-4afd-b66b-ff33c1da3841)
 
 # API Spec
+
+## Login User
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/v1/users/login`
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+- Body :
+
+```json
+{
+  "email": "mizz@gmail.com",
+  "password": "password"
+}
+```
+
+Response :
+
+```json
+{
+  "token": "string"
+}
+```
+
+## Register User
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/v1/users/register`
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+- Body :
+
+```json
+{
+  "email": "jani@gmail.com",
+  "name": "Anjani",
+  "password": "password"
+}
+```
+
+Response :
+
+```json
+{
+  "user": {
+    "email": "jani@gmail.com",
+    "name": "Anjani",
+    "password": "hash of string",
+    "role": "member"
+  }
+}
+```
+
+## Add User
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/v1/users/add`
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: Bearer <token>
+- Body :
+
+```json
+{
+  "email": "dummy@gmail.com",
+  "name": "Dummy",
+  "password": "password",
+  "role": "admin"
+}
+```
+
+Response :
+
+```json
+{
+  "user": {
+    "email": "dummy@gmail.com",
+    "name": "Dummy",
+    "password": "hash of string",
+    "role": "admin",
+    "id": "number"
+  }
+}
+```
+
+## Profile User
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/v1/users/profile`
+- Header :
+  - Content-Type: application/json
+  - Accept: application/json
+  - Authorization: Bearer <token>
+
+Response :
+
+```json
+{
+  "id": "number",
+  "email": "mizz@gmail.com",
+  "name": "Misbah",
+  "role": "superadmin",
+  "iat": "number",
+  "exp": "number"
+}
+```
 
 ## Create Car
 
@@ -39,6 +167,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
+  - Authorization: Bearer <token>
 - Body :
 
 ```json
@@ -199,6 +328,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
+  - Authorization: Bearer <token>
 - Body :
 
 ```json
@@ -227,6 +357,7 @@ Request :
 - Endpoint : `/api/v1/cars`
 - Header :
   - Accept: application/json
+  - Authorization: Bearer <token>
 
 Response :
 
@@ -246,6 +377,7 @@ Request :
 - Endpoint : `/api/v1/cars/:id`
 - Header :
   - Accept: application/json
+  - Authorization: Bearer <token>
 
 Response :
 

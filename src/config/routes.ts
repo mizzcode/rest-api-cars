@@ -133,7 +133,134 @@ apiRouter.post('/api/v1/users/login', usersController.login);
  *                  example: Email already exist
  */
 apiRouter.post('/api/v1/users/register', usersController.register);
+
+/**
+ * @openapi
+ * /api/v1/users/add:
+ *  post:
+ *    summary: Add a new user
+ *    description: Add a new user
+ *    tags:
+ *      - Users
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - email
+ *              - name
+ *              - password
+ *              - role
+ *            properties:
+ *              email:
+ *                type: string
+ *                format: email
+ *                example: dummy@gmail.com
+ *              name:
+ *                type: string
+ *                example: Dummy
+ *              password:
+ *                type: string
+ *              role:
+ *                type: string
+ *                example: admin
+ *    responses:
+ *      201:
+ *        description: Create a new user
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                user:
+ *                  type: object
+ *                  properties:
+ *                    email:
+ *                      type: string
+ *                      format: email
+ *                    name:
+ *                      type: string
+ *                    password:
+ *                      type: string
+ *                    id:
+ *                      type: number
+ *                    role:
+ *                      type: string
+ *                      example: admin
+ *      400:
+ *        description: Bad Request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  example: The value of role is not allowed
+ *      401:
+ *        description: Unauthorized
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  example: Invalid token!
+ *      409:
+ *        description: Conflict
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  example: Email already exist
+ */
 apiRouter.post('/api/v1/users/add', authToken, usersController.addUser);
+
+/**
+ * @openapi
+ * /api/v1/users/profile:
+ *  post:
+ *    summary: Get current user
+ *    description: Get profile user
+ *    tags:
+ *      - Users
+ *    responses:
+ *      200:
+ *        description: OK
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: number
+ *                email:
+ *                  type: string
+ *                  format: email
+ *                name:
+ *                  type: string
+ *                role:
+ *                  type: string
+ *                iat:
+ *                  type: number
+ *                exp:
+ *                  type: number
+ *      401:
+ *        description: Unauthorized
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                message:
+ *                  type: string
+ *                  example: Invalid token!
+ */
 apiRouter.get('/api/v1/users/profile', authToken, usersController.profile);
 
 apiRouter.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
