@@ -34,7 +34,7 @@ export class UsersController {
       const user = await this.userService.getUserByEmail(email);
 
       if (!(await bcrypt.compare(password, user[0].password))) {
-        return res.status(401).json({ message: 'Email or Password is wrong' });
+        return res.status(400).json({ message: 'Email or Password is wrong' });
       }
       // token will expire in one hour
       const token = jwt.sign({ id: user[0].id, email: user[0].email, name: user[0].name, role: user[0].role }, 'cat', {
@@ -45,7 +45,7 @@ export class UsersController {
     } catch (err: any) {
       console.error(err);
       err.name = 'Email or Password is wrong';
-      return res.status(404).json({ message: err });
+      return res.status(400).json({ message: err });
     }
   };
 

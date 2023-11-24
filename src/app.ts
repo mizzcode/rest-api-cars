@@ -1,9 +1,9 @@
 import express, { Express } from 'express';
 import 'dotenv/config';
-import config from './config/knexfile';
-import { Model } from 'objection';
 import knex from 'knex';
 import path from 'path';
+import config from './config/knexfile';
+import { Model } from 'objection';
 import { routeNotFound } from './utils/routeNotFound';
 import { appRouter } from './config/routes';
 import { apiRouter } from './config/routes';
