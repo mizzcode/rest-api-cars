@@ -62,6 +62,8 @@ Request :
 
 Response :
 
+> code 200
+
 ```json
 {
   "token": "string"
@@ -88,6 +90,8 @@ Request :
 ```
 
 Response :
+
+> code 201
 
 ```json
 {
@@ -123,6 +127,8 @@ Request :
 
 Response :
 
+> code 200
+
 ```json
 {
   "user": {
@@ -147,6 +153,8 @@ Request :
   - Authorization: Bearer token
 
 Response :
+
+> code 200
 
 ```json
 {
@@ -198,6 +206,8 @@ Request :
 
 Response :
 
+> code 201
+
 ```json
 {
   "status": "Success",
@@ -219,6 +229,8 @@ Request :
   - Accept: application/json
 
 Response :
+
+> code 200
 
 ```json
 [
@@ -293,6 +305,8 @@ Request :
 
 Response :
 
+> code 200
+
 ```json
 {
   "id": "a78366f3-04e4-4c42-acdd-3bf4e7a805e2",
@@ -342,6 +356,8 @@ Request :
 
 Response :
 
+> code 200
+
 ```json
 {
   "status": "Success",
@@ -362,6 +378,8 @@ Request :
 
 Response :
 
+> code 200
+
 ```json
 {
   "status": "Success",
@@ -381,6 +399,8 @@ Request :
   - Authorization: Bearer token
 
 Response :
+
+> code 200
 
 ```json
 {
