@@ -10,7 +10,6 @@ export const authToken = async (req: Request<{}, {}, {}, {}>, res: Response, nex
     const token = bearerToken?.split('Bearer ')[1];
 
     const privateKey = readFileSync(path.join(process.cwd(), 'keys', 'jwtRS256.key'));
-    console.log('authToken', privateKey);
 
     if (!token) {
       return res.status(401).json({ message: 'Invalid Token' });
