@@ -108,7 +108,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 - Body :
 
 ```json
@@ -143,7 +143,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 
 Response :
 
@@ -167,7 +167,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 - Body :
 
 ```json
@@ -328,7 +328,7 @@ Request :
 - Header :
   - Content-Type: application/json
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 - Body :
 
 ```json
@@ -357,7 +357,7 @@ Request :
 - Endpoint : `/api/v1/cars`
 - Header :
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 
 Response :
 
@@ -377,7 +377,7 @@ Request :
 - Endpoint : `/api/v1/cars/:id`
 - Header :
   - Accept: application/json
-  - Authorization: Bearer <token>
+  - Authorization: Bearer token
 
 Response :
 
