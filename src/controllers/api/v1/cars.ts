@@ -16,7 +16,6 @@ export class CarsController {
 
   postSaveCar = async (req: Request<{}, {}, Cars>, res: Response) => {
     try {
-      // @ts-expect-error
       if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
         return res.status(401).json({ message: 'Only role superadmin or admin!' });
       }
@@ -26,10 +25,7 @@ export class CarsController {
         // karena options dan specs value nya array maka harus dijadikan string
         options: JSON.stringify(req.body.options),
         specs: JSON.stringify(req.body.specs),
-        // untuk mengecek siapa yang membuat data mobil
-        // @ts-expect-error
         created_by: req.user.name,
-        // @ts-expect-error
         updated_by: req.user.name,
       };
       // mengubah file upload data biner/bytes menjadi format base64
@@ -105,7 +101,6 @@ export class CarsController {
 
   patchEditCar = async (req: Request<IParams>, res: Response) => {
     try {
-      // @ts-expect-error
       if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
         return res.status(401).json({ message: 'Only role superadmin or admin!' });
       }
@@ -117,7 +112,6 @@ export class CarsController {
         // karena options dan specs value nya array maka harus dijadikan string
         options: JSON.stringify(req.body.options),
         specs: JSON.stringify(req.body.specs),
-        // @ts-expect-error
         updated_by: req.user.name,
       };
       // update data car berdasarkan id
@@ -142,7 +136,6 @@ export class CarsController {
 
   deleteCarById = async (req: Request<IParams>, res: Response) => {
     try {
-      // @ts-expect-error
       if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
         return res.status(401).json({ message: 'Only role superadmin or admin!' });
       }
@@ -170,7 +163,6 @@ export class CarsController {
 
   deleteCar = async (req: Request, res: Response) => {
     try {
-      // @ts-expect-error
       if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
         return res.status(401).json({ message: 'Only role superadmin or admin!' });
       }

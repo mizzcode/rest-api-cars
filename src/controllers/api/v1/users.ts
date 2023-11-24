@@ -55,7 +55,6 @@ export class UsersController {
 
   addUser = async (req: Request<{}, {}, Users>, res: Response) => {
     try {
-      // @ts-expect-error
       if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
         return res.status(401).json({ message: 'Only role superadmin or admin!' });
       }
