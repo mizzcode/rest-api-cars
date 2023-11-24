@@ -41,7 +41,11 @@ $ npm run keys # create private and public key jwt # !! no passphrase !!
 
 ![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/7602d2ad-48e8-4a27-bda3-de4bc9f06361)
 
-# API Spec
+# Docs APIs
+- Method : GET
+- Endpoint : `/docs`
+
+# API Spec with openAPI
 
 ## Login User
 
