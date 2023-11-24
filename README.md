@@ -23,6 +23,7 @@ $ npm run dev # run in development mode
 $ npm run setup # run migration, seeder
 $ npm run knex migrate:make migration_name # create new file migration
 $ npm run knex seed:make seed_name # create new file seeds
+$ npm run keys # create private and public key jwt # !! no passphrase !!
 ```
 
 ## Account User

@@ -3,12 +3,16 @@ import { Users } from '../../../models/users';
 import { UserService } from '../../../services/UserService';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { readFileSync } from 'fs';
+import path from 'path';
 
 export class UsersController {
   userService: UserService;
+  privateKey: Buffer;
 
   constructor() {
     this.userService = new UserService();
+    this.privateKey = readFileSync(path.join(process.cwd(), 'keys', 'jwtRS256.key'));
   }
 
   register = async (req: Request<{}, {}, Users>, res: Response) => {
@@ -37,9 +41,14 @@ export class UsersController {
         return res.status(400).json({ message: 'Email or Password is wrong' });
       }
       // token will expire in one hour
-      const token = jwt.sign({ id: user[0].id, email: user[0].email, name: user[0].name, role: user[0].role }, 'cat', {
-        expiresIn: '1h',
-      });
+      const token = jwt.sign(
+        { id: user[0].id, email: user[0].email, name: user[0].name, role: user[0].role },
+        this.privateKey,
+        {
+          expiresIn: '1h',
+          algorithm: 'RS256',
+        }
+      );
 
       return res.status(200).json({ token });
     } catch (err: any) {
