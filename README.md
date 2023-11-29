@@ -103,7 +103,6 @@ Response :
   "user": {
     "email": "jani@gmail.com",
     "name": "Anjani",
-    "password": "hash of string",
     "role": "member"
   }
 }
