@@ -1,21 +1,21 @@
-import express from 'express';
-import upload from './multer';
-import { authToken } from '../middlewares/authToken';
-import { MainController } from '../controllers/web/main';
-import { CarsController } from '../controllers/api/v1/cars';
-import { UsersController } from '../controllers/api/v1/users';
-import { swaggerSpec } from '../utils/swagger';
-import swaggerUI from 'swagger-ui-express';
+import express from 'express'
+import upload from './multer'
+import { authToken } from '../middlewares/authToken'
+import { MainController } from '../controllers/web/main'
+import { CarsController } from '../controllers/api/v1/cars'
+import { UsersController } from '../controllers/api/v1/users'
+import { swaggerSpec } from '../utils/swagger'
+import swaggerUI from 'swagger-ui-express'
 
-const appRouter = express.Router();
-const apiRouter = express.Router();
+const appRouter = express.Router()
+const apiRouter = express.Router()
 
-const mainController = new MainController();
-const carsController = new CarsController();
-const usersController = new UsersController();
+const mainController = new MainController()
+const carsController = new CarsController()
+const usersController = new UsersController()
 
-appRouter.get('/', authToken, mainController.index);
-appRouter.get('/cars', authToken, mainController.searchCars);
+appRouter.get('/', authToken, mainController.index)
+appRouter.get('/cars', authToken, mainController.searchCars)
 
 /**
  * @openapi
@@ -86,7 +86,7 @@ appRouter.get('/cars', authToken, mainController.searchCars);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.get('/api/v1/cars', authToken, carsController.getCarAll);
+apiRouter.get('/api/v1/cars', carsController.getCarAll)
 
 /**
  * @openapi
@@ -123,7 +123,7 @@ apiRouter.get('/api/v1/cars', authToken, carsController.getCarAll);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.delete('/api/v1/cars', authToken, carsController.deleteCar);
+apiRouter.delete('/api/v1/cars', authToken, carsController.deleteCar)
 
 /**
  * @openapi
@@ -199,7 +199,7 @@ apiRouter.delete('/api/v1/cars', authToken, carsController.deleteCar);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.get('/api/v1/cars/:id', authToken, carsController.getDetailCar);
+apiRouter.get('/api/v1/cars/:id', authToken, carsController.getDetailCar)
 
 /**
  * @openapi
@@ -249,7 +249,7 @@ apiRouter.get('/api/v1/cars/:id', authToken, carsController.getDetailCar);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.patch('/api/v1/cars/:id', authToken, carsController.patchEditCar);
+apiRouter.patch('/api/v1/cars/:id', authToken, carsController.patchEditCar)
 
 /**
  * @openapi
@@ -293,7 +293,7 @@ apiRouter.patch('/api/v1/cars/:id', authToken, carsController.patchEditCar);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.delete('/api/v1/cars/:id', authToken, carsController.deleteCarById);
+apiRouter.delete('/api/v1/cars/:id', authToken, carsController.deleteCarById)
 
 /**
  * @openapi
@@ -366,7 +366,7 @@ apiRouter.delete('/api/v1/cars/:id', authToken, carsController.deleteCarById);
  *                  type: string
  *                  example: Invalid Token
  */
-apiRouter.post('/api/v1/cars', authToken, upload.single('image'), carsController.postSaveCar);
+apiRouter.post('/api/v1/cars', authToken, upload.single('image'), carsController.postSaveCar)
 
 /**
  * @openapi
@@ -413,7 +413,7 @@ apiRouter.post('/api/v1/cars', authToken, upload.single('image'), carsController
  *                  type: string
  *                  example: Email or Password is wrong
  */
-apiRouter.post('/api/v1/users/login', usersController.login);
+apiRouter.post('/api/v1/users/login', usersController.login)
 
 /**
  * @openapi
@@ -476,7 +476,7 @@ apiRouter.post('/api/v1/users/login', usersController.login);
  *                  type: string
  *                  example: Email already exist
  */
-apiRouter.post('/api/v1/users/register', usersController.register);
+apiRouter.post('/api/v1/users/register', usersController.register)
 
 /**
  * @openapi
@@ -565,7 +565,7 @@ apiRouter.post('/api/v1/users/register', usersController.register);
  *                  type: string
  *                  example: Email already exist
  */
-apiRouter.post('/api/v1/users/add', authToken, usersController.addUser);
+apiRouter.post('/api/v1/users/add', authToken, usersController.addUser)
 
 /**
  * @openapi
@@ -609,7 +609,7 @@ apiRouter.post('/api/v1/users/add', authToken, usersController.addUser);
  *                  type: string
  *                  example: Invalid token!
  */
-apiRouter.get('/api/v1/users/profile', authToken, usersController.profile);
+apiRouter.get('/api/v1/users/profile', authToken, usersController.profile)
 
 /**
  * @openapi
@@ -654,6 +654,6 @@ apiRouter.get('/api/v1/users/profile', authToken, usersController.profile);
  *                          type: string
  */
 
-apiRouter.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+apiRouter.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
-export { appRouter, apiRouter };
+export { appRouter, apiRouter }
