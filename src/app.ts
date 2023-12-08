@@ -1,29 +1,35 @@
-import express, { Express } from 'express';
-import 'dotenv/config';
-import knex from 'knex';
-import path from 'path';
-import config from './config/knexfile';
-import { Model } from 'objection';
-import { routeNotFound } from './utils/routeNotFound';
-import { appRouter } from './config/routes';
-import { apiRouter } from './config/routes';
+import express, { Express } from 'express'
+import 'dotenv/config'
+import knex from 'knex'
+import path from 'path'
+import config from './config/knexfile'
+import { Model } from 'objection'
+import { routeNotFound } from './utils/routeNotFound'
+import { appRouter } from './config/routes'
+import { apiRouter } from './config/routes'
+import cors from 'cors'
 
-const app: Express = express();
-const port = process.env.PORT || 4000;
+const app: Express = express()
+const port = process.env.PORT || 4000
 
 // connect db postgres client
-Model.knex(knex(config.development));
+Model.knex(knex(config.development))
 
-app.set('views', path.join(process.cwd(), 'src', 'views'));
-app.set('view engine', 'ejs');
-app.use(express.static(path.join(process.cwd(), 'src', 'public')));
-app.use(express.json());
+app.set('views', path.join(process.cwd(), 'src', 'views'))
+app.set('view engine', 'ejs')
+app.use(express.static(path.join(process.cwd(), 'src', 'public')))
+app.use(express.json())
+app.use(
+    cors({
+        origin: ['http://localhost:5173'],
+    })
+)
 // inisiasi route
-app.use(appRouter);
-app.use(apiRouter);
+app.use(appRouter)
+app.use(apiRouter)
 
-app.all('*', routeNotFound);
+app.all('*', routeNotFound)
 
 app.listen(port, () => {
-  console.log(`server listen on http://localhost:${port}`);
-});
+    console.log(`server listen on http://localhost:${port}`)
+})
