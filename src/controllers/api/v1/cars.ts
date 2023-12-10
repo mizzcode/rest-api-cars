@@ -22,7 +22,10 @@ export class CarsController {
             // terima data json dari request
             const body = {
                 ...req.body,
-                // karena options dan specs value nya array maka harus dijadikan string
+                rentPerDay: +req.body.rentPerDay,
+                capacity: +req.body.capacity,
+                available: Boolean(req.body.available),
+                year: +req.body.year,
                 options: JSON.stringify(req.body.options),
                 specs: JSON.stringify(req.body.specs),
                 created_by: req.user.name,
@@ -33,16 +36,15 @@ export class CarsController {
             // format data uri
             const file = `data:${req.file?.mimetype};base64,${fileBase64}`
             // cloudinary - cloud storage
-            cloudinary.uploader
+            await cloudinary.uploader
                 .upload(file, {
                     resource_type: 'image',
                     public_id: 'cars',
                     tags: ['car rental', 'rental car', 'binar car rental'],
                 })
-                .then((result) => {
-                    body.image = result.secure_url
-                })
-            // insert query
+                .then((data) => (body.image = data.secure_url))
+                .catch((err) => console.error(err))
+
             const car = await this.carService.addCar(body)
 
             res.status(201).json({
@@ -53,6 +55,7 @@ export class CarsController {
                 },
                 statusCode: 201,
             })
+
             // jika ada error maka akan ditangkap sehingga server tetap bekerja dengan baik
         } catch (err: any) {
             res.status(400).json({
