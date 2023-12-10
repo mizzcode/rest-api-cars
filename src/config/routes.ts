@@ -25,8 +25,6 @@ appRouter.get('/cars', authToken, mainController.searchCars)
  *    description: Get all car
  *    tags:
  *      - Cars
- *    security:
- *      - bearerAuth: []
  *    responses:
  *      200:
  *        description: OK
