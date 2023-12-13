@@ -5,31 +5,44 @@ import path from 'path'
 import config from './config/knexfile'
 import { Model } from 'objection'
 import { routeNotFound } from './utils/routeNotFound'
-import { appRouter } from './config/routes'
-import { apiRouter } from './config/routes'
+import { appRouter, apiRouter } from './config/routes'
 import cors from 'cors'
 
-const app: Express = express()
 const port = process.env.PORT || 4000
 
 // connect db postgres client
 Model.knex(knex(config.development))
 
-app.set('views', path.join(process.cwd(), 'src', 'views'))
-app.set('view engine', 'ejs')
-app.use(express.static(path.join(process.cwd(), 'src', 'public')))
-app.use(express.json())
-app.use(
-    cors({
-        origin: ['http://localhost:5173'],
-    })
-)
-// inisiasi route
-app.use(appRouter)
-app.use(apiRouter)
+class App {
+    public app: Express
 
-app.all('*', routeNotFound)
+    public constructor() {
+        this.app = express()
+        this.plugins()
+        this.routes()
+    }
 
-app.listen(port, () => {
-    console.log(`server listen on http://localhost:${port}`)
-})
+    protected plugins() {
+        this.app.set('views', path.join(process.cwd(), 'src', 'views'))
+        this.app.set('view engine', 'ejs')
+        this.app.use(express.static(path.join(process.cwd(), 'src', 'public')))
+        this.app.use(express.json())
+        this.app.use(
+            cors({
+                origin: ['http://localhost:5173'],
+            })
+        )
+    }
+
+    protected routes() {
+        // inisiasi route
+        this.app.use(appRouter)
+        this.app.use(apiRouter)
+        this.app.all('*', routeNotFound)
+        this.app.listen(port, () => {
+            console.log(`server listen on http://localhost:${port}`)
+        })
+    }
+}
+
+export default App
