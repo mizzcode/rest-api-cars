@@ -14,8 +14,8 @@ const mainController = new MainController()
 const carsController = new CarsController()
 const usersController = new UsersController()
 
-appRouter.get('/', authToken, mainController.index)
-appRouter.get('/cars', authToken, mainController.searchCars)
+appRouter.get('/', mainController.index)
+appRouter.get('/cars', mainController.searchCars)
 
 /**
  * @openapi
