@@ -14,7 +14,7 @@ export class CarRepository {
     }
 
     findByAvailableAt = async (rentalDate: Date) => {
-        return await CarsModel.query().where('availableAt', '>', rentalDate).orderBy('available_at')
+        return await CarsModel.query().where('availableAt', '>', rentalDate).orderBy('availableAt')
     }
 
     updateById = async (id: string, car: Partial<Cars>) => {
