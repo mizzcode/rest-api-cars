@@ -38,8 +38,7 @@ describe('user register API:/api/v1/users/register', () => {
             },
         })
     })
-})
-describe('user register API:/api/v1/users/register', () => {
+
     it("should be user can't register", async () => {
         const response = await supertest(app).post('/api/v1/users/register').send({
             email,
