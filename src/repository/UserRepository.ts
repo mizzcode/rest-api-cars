@@ -1,11 +1,15 @@
-import { UsersModel, Users } from '../models/users';
+import { UsersModel, Users } from '../models/users'
 
 export class UserRepository {
-  save = async (user: Partial<Users>) => {
-    return await UsersModel.query().insert(user).returning(['email', 'name', 'role']);
-  };
+    save = async (user: Partial<Users>) => {
+        return await UsersModel.query().insert(user).returning(['email', 'name', 'role'])
+    }
 
-  findUserByEmail = async (email: string) => {
-    return await UsersModel.query().where('email', email).throwIfNotFound();
-  };
+    findUserByEmail = async (email: string) => {
+        return await UsersModel.query().where('email', email).throwIfNotFound()
+    }
+
+    deleteAllUser = async () => {
+        return await UsersModel.query().delete()
+    }
 }

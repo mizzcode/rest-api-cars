@@ -41,6 +41,9 @@ export class UsersController {
     login = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body
+
+            console.log(email, password)
+
             const user = await this.userService.getUserByEmail(email)
 
             if (!(await bcrypt.compare(password, user[0].password))) {
@@ -90,6 +93,16 @@ export class UsersController {
                 return res.status(400).json({ message: 'The value of role is not allowed' })
             }
             return res.status(409).json({ message: 'Email already exist' })
+        }
+    }
+
+    deleteUser = async (_: Request, res: Response) => {
+        try {
+            await this.userService.deleteAllUser()
+            return res.status(200).json({ message: 'Success delete all user' })
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json({ message: 'Server error' })
         }
     }
 }

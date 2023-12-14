@@ -1,18 +1,22 @@
-import { Users } from '../models/users';
-import { UserRepository } from '../repository/UserRepository';
+import { Users } from '../models/users'
+import { UserRepository } from '../repository/UserRepository'
 
 export class UserService {
-  userRepository: UserRepository;
+    userRepository: UserRepository
 
-  constructor() {
-    this.userRepository = new UserRepository();
-  }
+    constructor() {
+        this.userRepository = new UserRepository()
+    }
 
-  saveUser = async (user: Partial<Users>) => {
-    return await this.userRepository.save(user);
-  };
+    saveUser = async (user: Partial<Users>) => {
+        return await this.userRepository.save(user)
+    }
 
-  getUserByEmail = async (email: string) => {
-    return await this.userRepository.findUserByEmail(email);
-  };
+    getUserByEmail = async (email: string) => {
+        return await this.userRepository.findUserByEmail(email)
+    }
+
+    deleteAllUser = async () => {
+        return await this.userRepository.deleteAllUser()
+    }
 }
