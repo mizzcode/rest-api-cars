@@ -8,8 +8,6 @@ import { routeNotFound } from './utils/routeNotFound'
 import { appRouter, apiRouter } from './config/routes'
 import cors from 'cors'
 
-const port = process.env.PORT || 4000
-
 // connect db postgres client
 Model.knex(knex(config.development))
 
@@ -39,9 +37,6 @@ class App {
         this.app.use(appRouter)
         this.app.use(apiRouter)
         this.app.all('*', routeNotFound)
-        this.app.listen(port, () => {
-            console.log(`server listen on http://localhost:${port}`)
-        })
     }
 }
 
