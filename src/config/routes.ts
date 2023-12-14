@@ -609,6 +609,9 @@ apiRouter.post('/api/v1/users/add', authToken, usersController.addUser)
  */
 apiRouter.get('/api/v1/users/profile', authToken, usersController.profile)
 
+// sementara tidak pasang middleware
+apiRouter.delete('/api/v1/users', usersController.deleteUser)
+
 /**
  * @openapi
  * components:
