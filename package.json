@@ -4,7 +4,7 @@
   "description": "Build REST API Cars Management",
   "scripts": {
     "build": "npx tsc",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "setup": "npx knex migrate:down --knexfile src/config/knexfile.ts && npx knex migrate:latest --knexfile src/config/knexfile.ts && npx knex seed:run --knexfile src/config/knexfile.ts",
     "knex": "npx knex --knexfile src/config/knexfile.ts",
     "keys": "cd keys && ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key",
