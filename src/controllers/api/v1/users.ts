@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { Users } from '../../../models/users'
+import type { Request, Response } from 'express'
+import type { Users } from '../../../models/users'
 import { UserService } from '../../../services/UserService'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -15,7 +15,10 @@ export class UsersController {
         this.privateKey = readFileSync(path.join(process.cwd(), 'keys', 'jwtRS256.key'))
     }
 
-    register = async (req: Request<{}, {}, Users>, res: Response) => {
+    register = async (
+        req: Request<unknown, unknown, Users>,
+        res: Response
+    ): Promise<Response<any, Record<string, any>>> => {
         try {
             const body = {
                 email: req.body.email,
@@ -38,9 +41,10 @@ export class UsersController {
         }
     }
 
-    login = async (req: Request, res: Response) => {
+    login = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
         try {
-            const { email, password } = req.body
+            const email = req.body.email as string
+            const password = req.body.password as string
 
             console.log(email, password)
 
@@ -67,11 +71,14 @@ export class UsersController {
         }
     }
 
-    profile = async (req: Request, res: Response) => {
+    profile = async (req: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
         return res.status(200).json(req.user)
     }
 
-    addUser = async (req: Request<{}, {}, Users>, res: Response) => {
+    addUser = async (
+        req: Request<unknown, unknown, Users>,
+        res: Response
+    ): Promise<Response<any, Record<string, any>>> => {
         try {
             if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
                 return res.status(401).json({ message: 'Only role superadmin or admin!' })
@@ -96,7 +103,7 @@ export class UsersController {
         }
     }
 
-    deleteUser = async (_: Request, res: Response) => {
+    deleteUser = async (_: Request, res: Response): Promise<Response<any, Record<string, any>>> => {
         try {
             await this.userService.deleteAllUser()
             return res.status(200).json({ message: 'Success delete all user' })
