@@ -1,4 +1,4 @@
-import { Users } from '../models/users'
+import type { Users } from '../models/users'
 import { UserRepository } from '../repository/UserRepository'
 
 export class UserService {
@@ -8,15 +8,15 @@ export class UserService {
         this.userRepository = new UserRepository()
     }
 
-    saveUser = async (user: Partial<Users>) => {
+    saveUser = async (user: Partial<Users>): Promise<Users> => {
         return await this.userRepository.save(user)
     }
 
-    getUserByEmail = async (email: string) => {
+    getUserByEmail = async (email: string): Promise<Users[]> => {
         return await this.userRepository.findUserByEmail(email)
     }
 
-    deleteAllUser = async () => {
+    deleteAllUser = async (): Promise<number> => {
         return await this.userRepository.deleteAllUser()
     }
 }
