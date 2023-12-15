@@ -41,7 +41,7 @@ class App {
         this.app.all('*', routeNotFound)
     }
 
-    public startServer(port: number): Server {
+    public startServer(port: number | string): Server {
         return this.app.listen(port, () => {
             console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
         })
