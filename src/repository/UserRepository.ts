@@ -11,6 +11,10 @@ export class UserRepository {
     }
 
     deleteAllUser = async (): Promise<number> => {
-        return await UsersModel.query().delete()
+        return await UsersModel.query().delete().throwIfNotFound()
+    }
+
+    findUserOne = async (): Promise<UsersModel | undefined> => {
+        return await UsersModel.query().first().throwIfNotFound()
     }
 }
