@@ -19,4 +19,8 @@ export class UserService {
     deleteAllUser = async (): Promise<number> => {
         return await this.userRepository.deleteAllUser()
     }
+
+    getOneUser = async (): Promise<Users | undefined> => {
+        return await this.userRepository.findUserOne()
+    }
 }
