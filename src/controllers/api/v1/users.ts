@@ -51,7 +51,7 @@ export class UsersController {
             const user = await this.userService.getUserByEmail(email)
 
             if (!(await bcrypt.compare(password, user[0].password))) {
-                return res.status(400).json({ message: 'Email or Password is wrong' })
+                throw new Error('Email or Password is wrong')
             }
             // token will expire in one hour
             const token = jwt.sign(
@@ -66,8 +66,7 @@ export class UsersController {
             return res.status(200).json({ token })
         } catch (err: any) {
             console.error(err)
-            err.name = 'Email or Password is wrong'
-            return res.status(400).json({ message: err })
+            return res.status(400).json({ message: err.message })
         }
     }
 
@@ -93,7 +92,13 @@ export class UsersController {
 
             const user = await this.userService.saveUser(body)
 
-            return res.status(201).json({ user })
+            return res.status(201).json({
+                user: {
+                    email: user.email,
+                    name: user.name,
+                    role: user.role,
+                },
+            })
         } catch (err: any) {
             console.error(err)
             if (err.constraint === 'users_role_check') {
@@ -110,6 +115,17 @@ export class UsersController {
         } catch (err) {
             console.error(err)
             return res.status(500).json({ message: 'Server error' })
+        }
+    }
+
+    getOneUser = async (_: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined> => {
+        try {
+            const user = await this.userService.getOneUser()
+
+            return res.status(200).json({ user })
+        } catch (error) {
+            console.error(error)
+            return res.status(404).json({ message: 'User not found!' })
         }
     }
 }
