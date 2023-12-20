@@ -28,6 +28,7 @@ jobs:
             - name: Create .env file
               run: |
                   touch .env
+                  echo PGCLIENT=postgresql
                   echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@localhost:5432/rest-api-cars-db?schema=public >> .env
             - name: Create Private Key
               run: npm run keys
