@@ -5,7 +5,7 @@ services:
         environment:
             - POSTGRES_USER=mizz
             - POSTGRES_PASSWORD=mizz
-            - POSTGRES_DB=binar_car_rental
+            - POSTGRES_DB=binar-car-rental
         ports:
             - 5432:5432
         volumes:
