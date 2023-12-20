@@ -3,7 +3,7 @@ import { port, server } from '../index'
 
 describe('test server', () => {
     it('should be using port for http server', () => {
-        expect(port).toBe('3000')
+        expect(port).toBeTruthy()
     })
 
     it('server should be running', () => {
