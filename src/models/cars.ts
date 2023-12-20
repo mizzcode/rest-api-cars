@@ -1,4 +1,5 @@
-import { Model, ModelObject } from 'objection'
+import type { JSONSchema, ModelObject } from 'objection'
+import { Model } from 'objection'
 
 export class CarsModel extends Model {
     // membuat type Cars
@@ -20,11 +21,9 @@ export class CarsModel extends Model {
     created_by!: string
     updated_by!: string
 
-    static get tableName() {
-        return 'cars'
-    }
+    static readonly tableName = 'cars'
     // validasi http request body
-    static get jsonSchema() {
+    static get jsonSchema(): JSONSchema {
         return {
             type: 'object',
             required: [
