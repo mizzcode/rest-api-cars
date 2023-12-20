@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import { CarService } from '../../services/CarService'
 
 interface IReqQuery {
@@ -15,28 +15,28 @@ export class MainController {
         this.carService = new CarService()
     }
 
-    index(_: Request, res: Response) {
-        return res.render('index')
+    index(_: Request, res: Response): void {
+        res.render('index')
     }
 
-    searchCars = async (req: Request<{}, {}, {}, IReqQuery>, res: Response) => {
+    searchCars = async (req: Request<unknown, unknown, unknown, IReqQuery>, res: Response): Promise<void> => {
         const { driver, date, pickupTime, totalPassenger } = req.query
 
         let availableCars = await this.carService.getCarAll()
 
-        if (date && pickupTime) {
+        if (date !== undefined && pickupTime !== undefined) {
             const rentalDate = new Date(date + pickupTime)
 
             availableCars = await this.carService.getCarByAvailableAt(rentalDate)
         }
 
         // mencari mobil dengan kapasitas terbesar
-        const maxCarCapacity = Math.max(...availableCars.map((car: any) => car.capacity))
+        const maxCarCapacity = Math.max(...availableCars.map((car) => car.capacity))
         // format rupiah
         const rupiah = this.carService.rupiah
 
-        let foundCar = true
+        const foundCar = true
 
-        return res.render('cars', { availableCars, driver, totalPassenger, maxCarCapacity, foundCar, rupiah })
+        res.render('cars', { availableCars, driver, totalPassenger, maxCarCapacity, foundCar, rupiah })
     }
 }
