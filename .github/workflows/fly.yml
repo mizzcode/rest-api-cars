@@ -30,7 +30,7 @@ jobs:
                   touch .env
                   echo DATABASE_URL=postgres://postgres:mizz@localhost:5432/binar-car-rental?schema=public >> .env
             - name: Migrate database
-              run: npx knex migrate:latest
+              run: npx knex migrate:latest --knexfile dist/config/knexfile.js
             - name: Test Coverage
               run: npm run coverage
             - uses: superfly/flyctl-actions/setup-flyctl@master
