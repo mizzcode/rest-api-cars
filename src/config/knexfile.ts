@@ -1,13 +1,13 @@
-import { configDotenv } from 'dotenv';
-import type { Knex } from 'knex';
-import path from 'path';
+import { configDotenv } from 'dotenv'
+import type { Knex } from 'knex'
+import path from 'path'
 
 // load .env
-configDotenv({ path: path.join(process.cwd(), '..', '..', '.env') });
+configDotenv({ path: path.join(process.cwd(), '..', '..', '.env') })
 
 // Update with your config settings.
 
-const config: { [key: string]: Knex.Config } = {
+const config: Record<string, Knex.Config> = {
     development: {
         client: process.env.PGCLIENT,
         connection: {
@@ -43,6 +43,6 @@ const config: { [key: string]: Knex.Config } = {
             tableName: 'knex_migrations',
         },
     },
-};
+}
 
-export default config;
+export default config
