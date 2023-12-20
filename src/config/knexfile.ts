@@ -9,11 +9,11 @@ configDotenv({ path: path.join(process.cwd(), '..', '..', '.env') })
 
 const config: Record<string, Knex.Config> = {
     development: {
-        client: process.env.PGCLIENT,
+        client: process.env.PGCLIENT ?? 'postgresql',
         connection: {
-            database: process.env.PGDATABASE,
-            user: process.env.PGUSER,
-            password: process.env.PGPASSWORD,
+            database: process.env.PGDATABASE ?? 'binar-car-rental',
+            user: process.env.PGUSER ?? 'mizz',
+            password: process.env.PGPASSWORD ?? 'mizz',
         },
         pool: {
             min: 0,

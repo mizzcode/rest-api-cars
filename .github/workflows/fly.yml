@@ -33,12 +33,10 @@ jobs:
                   echo CLOUD_NAME=dshomxqjc >> .env
                   echo API_KEY=537442372921743 >> .env
                   echo API_SECRET=Bts0PlsC3J302sslMc27Lhakq7U >> .env
-                  echo PGCLIENT=postgresql >> .env
-                  echo PGDATABASE=binar-car-rental >> .env
-                  echo PGUSER=mizz >> .env
-                  echo PGPASSWORD=mizz >> .env
+            - name: Create Private Key
+              run: npm run keys
             - name: Migrate database and Seed
-              run: npx knex migrate:latest --knexfile src/config/knexfile.ts && npx knex seed:run --knexfile src/config/knexfile.ts
+              run: npx knex migrate:down --knexfile src/config/knexfile.ts && npx knex migrate:latest --knexfile src/config/knexfile.ts && npx knex seed:run --knexfile src/config/knexfile.ts
             - name: Test Coverage
               run: npm run coverage
             - uses: superfly/flyctl-actions/setup-flyctl@master
