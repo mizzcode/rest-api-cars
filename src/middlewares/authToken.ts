@@ -20,7 +20,7 @@ export const authToken = async (
         }
 
         jwt.verify(token, privateKey, (err, user) => {
-            if (err === null) {
+            if (err !== null) {
                 return res.status(403).json({ message: 'Forbidden' })
             }
             // @ts-expect-error user
