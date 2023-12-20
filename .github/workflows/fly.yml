@@ -1,0 +1,39 @@
+name: CI CD Lengkap Sekali
+on:
+    push:
+        branches:
+            - main
+jobs:
+    deploy:
+        name: Deploy app
+        runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:latest
+                env:
+                    POSTGRES_USER: mizz
+                    POSTGRES_PASSWORD: mizz
+                    POSTGRES_DB: binar-car-rental
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    - 5432:5432
+        steps:
+            - uses: actions/checkout@v3
+            - name: Install
+              run: npm ci
+            - name: Create .env file
+              run: |
+                  touch .env
+                  echo DATABASE_URL=postgres://postgres:mizz@localhost:5432/binar-car-rental?schema=public >> .env
+            - name: Migrate database
+              run: npx knex migrate:latest
+            - name: Test Coverage
+              run: npm run coverage
+            - uses: superfly/flyctl-actions/setup-flyctl@master
+            - run: flyctl deploy --remote-only
+              env:
+                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
