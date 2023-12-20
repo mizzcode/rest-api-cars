@@ -5,19 +5,33 @@ import App from '../app'
 import { createUser } from '../utils/createUser'
 import bcrypt from 'bcrypt'
 import { fakerID_ID as faker } from '@faker-js/faker'
+import { login } from '../utils/login'
 
 describe('test user module', () => {
     const app: Express = new App().app
     const email: string = faker.internet.email()
     const name: string = faker.person.fullName()
-    const password: Promise<string> = bcrypt.hash(faker.internet.password(), 10)
+    const password: string = faker.internet.password()
+    const passwordBcrypt: Promise<string> = bcrypt.hash(password, 10)
 
     let token: string = ''
 
-    it('all users should be deleted when row in db is not empty', async () => {
-        await createUser(email, name)
+    it('should be able to login', async () => {
+        const response = await login(supertest, app, 'mizz@gmail.com', 'password')
 
-        const response = await supertest(app).delete('/api/v1/users')
+        expect(response).toBeTruthy()
+
+        console.log(response)
+
+        token = response.body.token
+    })
+
+    it('all users should be deleted when row in db is not empty', async () => {
+        const response = await supertest(app)
+            .delete('/api/v1/users')
+            .set({
+                Authorization: `Bearer ${token}`,
+            })
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toMatchObject({
@@ -26,7 +40,11 @@ describe('test user module', () => {
     })
 
     it("should be can't delete all user because row in db is empty", async () => {
-        const response = await supertest(app).delete('/api/v1/users')
+        const response = await supertest(app)
+            .delete('/api/v1/users')
+            .set({
+                Authorization: `Bearer ${token}`,
+            })
 
         expect(response.statusCode).toBe(500)
         expect(response.body).toMatchObject({
@@ -34,13 +52,14 @@ describe('test user module', () => {
         })
     })
 
-    it('should be login superadmin', async () => {
-        await createUser()
+    it('should be created user utils', async () => {
+        const response = await createUser()
 
-        const response = await supertest(app).post('/api/v1/users/login').send({
-            email: 'mizz@gmail.com',
-            password: 'password',
-        })
+        expect(response).toBeTruthy()
+    })
+
+    it('should be login superadmin', async () => {
+        const response = await login(supertest, app, 'mizz@gmail.com', 'password')
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toMatchObject({
@@ -51,10 +70,8 @@ describe('test user module', () => {
     })
 
     it("should be can't login because password is wrong", async () => {
-        const response = await supertest(app).post('/api/v1/users/login').send({
-            email: 'mizz@gmail.com',
-            password: 'salah',
-        })
+        const response = await login(supertest, app, 'mizz@gmail.com', 'salah')
+
         expect(response.statusCode).toBe(400)
         expect(response.body).toMatchObject({
             message: 'Email or Password is wrong',
@@ -67,7 +84,7 @@ describe('test user module', () => {
             .send({
                 email,
                 name,
-                password: await password,
+                password: await passwordBcrypt,
             })
 
         expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
@@ -87,7 +104,7 @@ describe('test user module', () => {
             .send({
                 email,
                 name,
-                password: await password,
+                password: await passwordBcrypt,
             })
 
         expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
@@ -171,12 +188,7 @@ describe('test user module', () => {
     })
 
     it('should be login member', async () => {
-        const response = await supertest(app)
-            .post('/api/v1/users/login')
-            .send({
-                email,
-                password: await password,
-            })
+        const response = await login(supertest, app, email, await passwordBcrypt)
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toMatchObject({
@@ -224,7 +236,11 @@ describe('test user module', () => {
     })
 
     it('should be get one user', async () => {
-        const response = await supertest(app).get('/api/v1/users/one')
+        const response = await supertest(app)
+            .get('/api/v1/users/one')
+            .set({
+                Authorization: `Bearer ${token}`,
+            })
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toMatchObject({
@@ -239,9 +255,17 @@ describe('test user module', () => {
     })
 
     it('should be user not found', async () => {
-        await supertest(app).delete('/api/v1/users')
+        await supertest(app)
+            .delete('/api/v1/users')
+            .set({
+                Authorization: `Bearer ${token}`,
+            })
 
-        const response = await supertest(app).get('/api/v1/users/one')
+        const response = await supertest(app)
+            .get('/api/v1/users/one')
+            .set({
+                Authorization: `Bearer ${token}`,
+            })
 
         expect(response.statusCode).toBe(404)
         expect(response.body).toMatchObject({
