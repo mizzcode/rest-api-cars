@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/unbound-method */
 import express from 'express'
 import upload from './multer'
 import { authToken } from '../middlewares/authToken'
@@ -609,8 +611,9 @@ apiRouter.post('/api/v1/users/add', authToken, usersController.addUser)
  */
 apiRouter.get('/api/v1/users/profile', authToken, usersController.profile)
 
-// sementara tidak pasang middleware
-apiRouter.delete('/api/v1/users', usersController.deleteUser)
+apiRouter.delete('/api/v1/users', authToken, usersController.deleteUser)
+
+apiRouter.get('/api/v1/users/one', authToken, usersController.getOneUser)
 
 /**
  * @openapi
