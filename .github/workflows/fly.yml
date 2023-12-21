@@ -11,9 +11,9 @@ jobs:
             postgres:
                 image: postgres:latest
                 env:
-                    POSTGRES_USER: postgres
-                    POSTGRES_PASSWORD: o2p3unETPVQnAVn
-                    POSTGRES_DB: rest-api-cars-db
+                    POSTGRES_USER: mizz
+                    POSTGRES_PASSWORD: jani
+                    POSTGRES_DB: binar_car_rental
                 options: >-
                     --health-cmd pg_isready
                     --health-interval 10s
@@ -28,8 +28,8 @@ jobs:
             - name: Create .env file
               run: |
                   touch .env
-                  echo PGCLIENT=postgresql >> .env
-                  echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@localhost:5432/rest-api-cars-db?schema=public >> .env
+                  echo CLIENT=pg >> .env
+                  echo DATABASE_URL=postgres://mizz:jani@localhost:5432/binar_car_rental?schema=public >> .env
             - name: Create Private Key
               run: npm run keys
             - name: Migrate database and Seed
