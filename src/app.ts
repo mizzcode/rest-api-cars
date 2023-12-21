@@ -31,6 +31,7 @@ class App {
             cors({
                 origin: [
                     'http://localhost:5173',
+                    'http://localhost:3000',
                     'https://rest-api-cars.fly.dev/',
                     'https://react-rentalcar.netlify.app',
                 ],
