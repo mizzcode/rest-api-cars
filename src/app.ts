@@ -30,8 +30,7 @@ class App {
         this.app.use(
             cors({
                 origin: [
-                    'http://localhost:5173',
-                    'http://localhost:3000',
+                    'http://127.0.0.1:5173',
                     'https://rest-api-cars.fly.dev/',
                     'https://react-rentalcar.netlify.app',
                 ],
@@ -48,7 +47,7 @@ class App {
 
     public startServer(port: number): Server {
         return this.app.listen(port, '0.0.0.0', () => {
-            console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+            console.log(`⚡️[server]: Server is running at http://127.0.0.1:${port}`)
         })
     }
 }
