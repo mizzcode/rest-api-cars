@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for rest-api-cars on 2023-12-14T20:19:48+07:00
+# fly.toml app configuration file generated for rest-api-cars on 2023-12-20T21:15:05+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,8 +8,11 @@ primary_region = "sin"
 
 [build]
 
+[env]
+  PORT = "8080"
+
 [http_service]
-  internal_port = 3000
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
