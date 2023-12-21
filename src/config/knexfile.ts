@@ -9,7 +9,7 @@ configDotenv({ path: path.join(process.cwd(), '..', '..', '.env') })
 
 const config: Record<string, Knex.Config> = {
     development: {
-        client: process.env.PGCLIENT,
+        client: process.env.CLIENT,
         connection: process.env.DATABASE_URL,
         pool: {
             min: 0,
@@ -25,7 +25,7 @@ const config: Record<string, Knex.Config> = {
     },
 
     production: {
-        client: process.env.PGCLIENT,
+        client: process.env.CLIENT,
         connection: process.env.DATABASE_URL,
         pool: {
             min: 0,
