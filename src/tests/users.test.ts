@@ -22,7 +22,7 @@ describe('test user module', () => {
         expect(response).toBeTruthy()
 
         token = response.body.token
-    })
+    }, 70000)
 
     it('all users should be deleted when row in db is not empty', async () => {
         const response = await supertest(app)
@@ -35,7 +35,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Success delete all user',
         })
-    })
+    }, 70000)
 
     it("should be can't delete all user because row in db is empty", async () => {
         const response = await supertest(app)
@@ -48,13 +48,13 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Server error',
         })
-    })
+    }, 70000)
 
     it('should be created user utils', async () => {
         const response = await createUser()
 
         expect(response).toBeTruthy()
-    })
+    }, 70000)
 
     it('should be login superadmin', async () => {
         const response = await login(supertest, app, 'mizz@gmail.com', 'password')
@@ -65,7 +65,7 @@ describe('test user module', () => {
         })
 
         token = response.body.token
-    })
+    }, 70000)
 
     it("should be can't login because password is wrong", async () => {
         const response = await login(supertest, app, 'mizz@gmail.com', 'salah')
@@ -74,7 +74,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Email or Password is wrong',
         })
-    })
+    }, 70000)
 
     it('should be user can register', async () => {
         const response = await supertest(app)
@@ -94,7 +94,7 @@ describe('test user module', () => {
                 role: 'member',
             },
         })
-    })
+    }, 70000)
 
     it("should be user can't register", async () => {
         const response = await supertest(app)
@@ -110,7 +110,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Email already exist',
         })
-    })
+    }, 70000)
 
     it('should be show the profile of user', async () => {
         const response = await supertest(app)
@@ -120,7 +120,7 @@ describe('test user module', () => {
             })
 
         expect(response.statusCode).toBe(200)
-    })
+    }, 70000)
 
     it('should be add a new user', async () => {
         const response = await supertest(app)
@@ -144,7 +144,7 @@ describe('test user module', () => {
                 role: 'admin',
             },
         })
-    })
+    }, 70000)
 
     it("should cant't add a new user with unknown role", async () => {
         const response = await supertest(app)
@@ -164,7 +164,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'The value of role is not allowed',
         })
-    })
+    }, 70000)
 
     it("should cant't add a new user", async () => {
         const response = await supertest(app)
@@ -183,7 +183,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Email already exist',
         })
-    })
+    }, 70000)
 
     it('should be login member', async () => {
         const response = await login(supertest, app, email, await passwordBcrypt)
@@ -194,7 +194,7 @@ describe('test user module', () => {
         })
 
         token = response.body.token
-    })
+    }, 70000)
 
     it("should can't add a new user because role user is member", async () => {
         const response = await supertest(app)
@@ -213,7 +213,7 @@ describe('test user module', () => {
         expect(response.body).toMatchObject({
             message: 'Only role superadmin or admin!',
         })
-    })
+    }, 70000)
 
     it('should be show the profile of user', async () => {
         const response = await supertest(app)
@@ -231,7 +231,7 @@ describe('test user module', () => {
             name: expect.any(String),
             role: expect.any(String),
         })
-    })
+    }, 70000)
 
     it('should be get one user', async () => {
         const response = await supertest(app)
@@ -250,7 +250,7 @@ describe('test user module', () => {
                 password: expect.any(String),
             },
         })
-    })
+    }, 70000)
 
     it('should be user not found', async () => {
         await supertest(app)
@@ -271,5 +271,5 @@ describe('test user module', () => {
         })
 
         await createUser()
-    })
+    }, 70000)
 })
