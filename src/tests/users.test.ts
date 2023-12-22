@@ -21,8 +21,6 @@ describe('test user module', () => {
 
         expect(response).toBeTruthy()
 
-        console.log(response)
-
         token = response.body.token
     })
 
