@@ -11,9 +11,8 @@ jobs:
             postgres:
                 image: postgres:latest
                 env:
-                    POSTGRES_USER: postgres
-                    POSTGRES_PASSWORD: o2p3unETPVQnAVn
-                    POSTGRES_DB: binar_car_rental
+                    POSTGRES_USER: mizz
+                    POSTGRES_PASSWORD: jani
                 options: >-
                     --health-cmd pg_isready
                     --health-interval 10s
@@ -29,11 +28,11 @@ jobs:
               run: |
                   touch .env
                   echo CLIENT=pg >> .env
-                  echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@127.0.0.1:5432/binar_car_rental?schema=public >> .env
+                  echo DATABASE_URL=postgres://mizz:jani@127.0.0.1:5432/postgres?schema=public >> .env
             - name: Create Private Key
               run: npm run keys
             - name: Migrate database and Seed
-              run: npx knex migrate:down --knexfile src/config/knexfile.ts && npx knex migrate:latest --knexfile src/config/knexfile.ts && npx knex seed:run --knexfile src/config/knexfile.ts
+              run: npm run setup
             - name: Test Coverage
               run: npm run coverage
             - uses: superfly/flyctl-actions/setup-flyctl@master
