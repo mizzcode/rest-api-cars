@@ -38,7 +38,6 @@ export class CarsController {
             const fileBase64 = req.file?.buffer.toString('base64')
             // format data uri
             const file = `data:${req.file?.mimetype};base64,${fileBase64}`
-            console.log(file)
             // cloudinary - cloud storage
             await cloudinary.uploader
                 .upload(file, {
@@ -49,6 +48,7 @@ export class CarsController {
                 .then((data) => (body.image = data.secure_url))
                 .catch((err) => {
                     console.error(err)
+                    throw new Error()
                 })
 
             const car = await this.carService.addCar(body)
@@ -66,7 +66,7 @@ export class CarsController {
         } catch (err: any) {
             res.status(400).json({
                 status: 'Fail',
-                message: err,
+                message: 'failed upload image',
             })
         }
     }
@@ -184,7 +184,6 @@ export class CarsController {
 
             // delete query
             const car = await this.carService.deleteCarAll()
-            console.log(car)
             // jika data cars tidak ada maka throw error
             if (car === 0) throw new Error('Data Cars not found!')
             // kalau data cars ada dan berhasil di hapus maka kirim response
