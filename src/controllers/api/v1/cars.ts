@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import { CarService } from '../../../services/CarService'
-import { Cars } from '../../../models/cars'
+import type { Cars } from '../../../models/cars'
 import cloudinary from '../../../config/cloudinary'
 
 interface IParams {
@@ -14,7 +14,10 @@ export class CarsController {
         this.carService = new CarService()
     }
 
-    postSaveCar = async (req: Request<{}, {}, Cars>, res: Response) => {
+    postSaveCar = async (
+        req: Request<unknown, unknown, Cars>,
+        res: Response
+    ): Promise<Response<any, Record<string, any>> | undefined> => {
         try {
             if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
                 return res.status(401).json({ message: 'Only role superadmin or admin!' })
@@ -35,6 +38,7 @@ export class CarsController {
             const fileBase64 = req.file?.buffer.toString('base64')
             // format data uri
             const file = `data:${req.file?.mimetype};base64,${fileBase64}`
+            console.log(file)
             // cloudinary - cloud storage
             await cloudinary.uploader
                 .upload(file, {
@@ -43,7 +47,9 @@ export class CarsController {
                     tags: ['car rental', 'rental car', 'binar car rental'],
                 })
                 .then((data) => (body.image = data.secure_url))
-                .catch((err) => console.error(err))
+                .catch((err) => {
+                    console.error(err)
+                })
 
             const car = await this.carService.addCar(body)
 
@@ -65,7 +71,7 @@ export class CarsController {
         }
     }
 
-    getCarAll = async (_: Request, res: Response) => {
+    getCarAll = async (_: Request, res: Response): Promise<void> => {
         try {
             // select query
             const cars = await this.carService.getCarAll()
@@ -83,7 +89,7 @@ export class CarsController {
         }
     }
 
-    getDetailCar = async (req: Request<IParams>, res: Response) => {
+    getDetailCar = async (req: Request<IParams>, res: Response): Promise<void> => {
         try {
             const id = req.params.id
             // select query berdasarkan id
@@ -102,15 +108,18 @@ export class CarsController {
         }
     }
 
-    patchEditCar = async (req: Request<IParams>, res: Response) => {
+    patchEditCar = async (
+        req: Request<IParams>,
+        res: Response
+    ): Promise<Response<any, Record<string, any>> | undefined> => {
         try {
             if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
                 return res.status(401).json({ message: 'Only role superadmin or admin!' })
             }
 
-            const id = req.params.id
+            const id: string = req.params.id
             // terima data json dari request
-            const body = {
+            const body: Partial<Cars> = {
                 ...req.body,
                 // karena options dan specs value nya array maka harus dijadikan string
                 options: JSON.stringify(req.body.options),
@@ -120,7 +129,7 @@ export class CarsController {
             // update data car berdasarkan id
             const car = await this.carService.editCar(id, body)
             // jika data car tidak ditemukan maka throw error
-            if (!car) throw new Error('Car not found!')
+            if (car === undefined) throw new Error('Car not found!')
             // kalau data car nya ada dan berhasil di update maka kirim response berhasil
             res.status(200).json({
                 status: 'Success',
@@ -137,7 +146,10 @@ export class CarsController {
         }
     }
 
-    deleteCarById = async (req: Request<IParams>, res: Response) => {
+    deleteCarById = async (
+        req: Request<IParams>,
+        res: Response
+    ): Promise<Response<any, Record<string, any>> | undefined> => {
         try {
             if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
                 return res.status(401).json({ message: 'Only role superadmin or admin!' })
@@ -147,7 +159,7 @@ export class CarsController {
             // delete query berdasarkan id
             const car = await this.carService.deleteCarById(id)
             // jika id tidak ditemukan maka throw error
-            if (!car) throw new Error('Car not found!')
+            if (car === 0) throw new Error('Car not found!')
             // kalau id di temukan dan berhasil di hapus maka kirim response
             res.status(200).json({
                 status: 'Success',
@@ -164,7 +176,7 @@ export class CarsController {
         }
     }
 
-    deleteCar = async (req: Request, res: Response) => {
+    deleteCar = async (req: Request, res: Response): Promise<Response<any, Record<string, any>> | undefined> => {
         try {
             if (req.user.role !== 'superadmin' && req.user.role !== 'admin') {
                 return res.status(401).json({ message: 'Only role superadmin or admin!' })
@@ -172,8 +184,9 @@ export class CarsController {
 
             // delete query
             const car = await this.carService.deleteCarAll()
+            console.log(car)
             // jika data cars tidak ada maka throw error
-            if (!car) throw new Error('Data Cars not found!')
+            if (car === 0) throw new Error('Data Cars not found!')
             // kalau data cars ada dan berhasil di hapus maka kirim response
             res.status(200).json({
                 status: 'Success',
