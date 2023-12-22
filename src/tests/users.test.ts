@@ -271,5 +271,6 @@ describe('test user module', () => {
         })
 
         await createUser()
+        await createUser('jani@gmail.com', 'Jani', 'member')
     }, 70000)
 })
