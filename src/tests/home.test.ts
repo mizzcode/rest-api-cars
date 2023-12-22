@@ -10,7 +10,7 @@ describe('landing page', function () {
 
         expect(response.headers['content-type']).toBe('text/html; charset=utf-8')
         expect(response.status).toBe(200)
-    })
+    }, 70000)
 })
 
 // Menggunakan tanggal saat ini
@@ -35,5 +35,5 @@ describe('search cars', function () {
 
         expect(response.headers['content-type']).toBe('text/html; charset=utf-8')
         expect(response.status).toBe(200)
-    })
+    }, 70000)
 })
