@@ -15,7 +15,7 @@ jobs:
               run: |
                   touch .env
                   echo CLIENT=pg >> .env
-                  echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@rest-api-cars-db.flycast:5432/binar_car_rental?schema=public >> .env
+                  echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@rest-api-cars-db:5432/binar_car_rental?schema=public >> .env
             - name: Create Private Key
               run: npm run keys
             - name: Migrate database and Seed
