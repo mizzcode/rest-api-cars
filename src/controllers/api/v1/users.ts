@@ -46,8 +46,6 @@ export class UsersController {
             const email = req.body.email as string
             const password = req.body.password as string
 
-            console.log(email, password)
-
             const user = await this.userService.getUserByEmail(email)
 
             if (!(await bcrypt.compare(password, user[0].password))) {
