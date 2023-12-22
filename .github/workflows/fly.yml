@@ -7,20 +7,6 @@ jobs:
     deploy:
         name: Deploy app
         runs-on: ubuntu-latest
-        services:
-            postgres:
-                image: postgres:latest
-                env:
-                    POSTGRES_USER: mizz
-                    POSTGRES_PASSWORD: jani
-                    POSTGRES_DB: binar_car_rental
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
-                ports:
-                    - 5432:5432
         steps:
             - uses: actions/checkout@v3
             - name: Install
@@ -29,7 +15,7 @@ jobs:
               run: |
                   touch .env
                   echo CLIENT=pg >> .env
-                  echo DATABASE_URL=postgres://mizz:jani@127.0.0.1:5432/binar_car_rental?schema=public >> .env
+                  echo DATABASE_URL=postgres://postgres:o2p3unETPVQnAVn@rest-api-cars-db.flycast:5432/binar_car_rental?schema=public >> .env
             - name: Create Private Key
               run: npm run keys
             - name: Migrate database and Seed
