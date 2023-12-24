@@ -1,16 +1,25 @@
 import type { Express } from 'express'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterAll } from 'vitest'
 import supertest from 'supertest'
 import App from '../app'
 import { login } from '../utils/login'
 import path from 'path'
 import jsonCar from './car.json'
+import { CarsModel } from '../models/cars'
+import * as utilsupload from '../utils/upload'
+
+vi.spyOn(utilsupload, 'uploadCloudinary').mockImplementation(async () => 'uri-image.com')
 
 describe('test cars module', () => {
     const app: Express = new App().app
 
     let token: string = ''
     let id: string = ''
+
+    afterAll(async () => {
+        await CarsModel.query().deleteById(id)
+        vi.clearAllMocks()
+    })
 
     it('should be able to login superadmin', async () => {
         const response = await login(supertest, app, 'mizz@gmail.com', 'password')
