@@ -39,3 +39,8 @@ jobs:
             - run: flyctl deploy --remote-only
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+                  API_KEY: ${{ secrets.API_KEY }}
+                  API_SECRET: ${{ secrets.API_SECRET }}
+                  CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+                  CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+                  PORT: ${{ secrets.PORT }}
