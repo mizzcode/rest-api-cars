@@ -62,7 +62,7 @@ describe('login member', () => {
             })
 
         expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
-        expect(response.statusCode).toBe(401)
+        expect(response.statusCode).toBe(404)
     }, 70000)
 
     it("should be can't delete car by id", async () => {

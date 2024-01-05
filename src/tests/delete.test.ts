@@ -48,7 +48,7 @@ describe('test cars module', () => {
 
         const response = await st
 
-        expect(response.statusCode).toBe(201)
+        expect(response.statusCode).to.equal(201)
 
         id = response.body.data.carId
     }, 70000)
