@@ -13,7 +13,7 @@ describe('login member', () => {
     let token: string = ''
 
     it('should be able to login member', async () => {
-        const response = await login(supertest, app, 'jani@gmail.com', 'password')
+        const response = await login(supertest, app, 'ende@gmail.com', 'password')
 
         expect(response).toBeTruthy()
 
@@ -62,7 +62,7 @@ describe('login member', () => {
             })
 
         expect(response.headers['content-type']).toBe('application/json; charset=utf-8')
-        expect(response.statusCode).toBe(404)
+        expect(response.statusCode).toBe(401)
     }, 70000)
 
     it("should be can't delete car by id", async () => {
