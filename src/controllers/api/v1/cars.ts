@@ -48,7 +48,6 @@ export class CarsController {
                 .then((data) => (body.image = data.secure_url))
                 .catch((err) => {
                     console.error(err)
-                    throw new Error()
                 })
 
             const car = await this.carService.addCar(body)
