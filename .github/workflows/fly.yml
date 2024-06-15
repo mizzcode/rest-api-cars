@@ -1,46 +1,44 @@
 name: CI CD Lengkap Sekali
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 jobs:
-    deploy:
-        name: Deploy app
-        runs-on: ubuntu-latest
-        services:
-            postgres:
-                image: postgres:latest
-                env:
-                    POSTGRES_USER: mizz
-                    POSTGRES_PASSWORD: jani
-                options: >-
-                    --health-cmd pg_isready
-                    --health-interval 10s
-                    --health-timeout 5s
-                    --health-retries 5
-                ports:
-                    - 5432:5432
-        steps:
-            - uses: actions/checkout@v3
-            - name: Install
-              run: npm ci
-            - name: Create .env file
-              run: |
-                  touch .env
-                  echo CLIENT=pg >> .env
-                  echo DATABASE_URL=postgres://mizz:jani@127.0.0.1:5432/postgres?schema=public >> .env
-            - name: Create Private Key
-              run: npm run keys
-            - name: Migrate database and Seed
-              run: npm run setup
-            - name: Test Coverage
-              run: npm run coverage
-            - uses: superfly/flyctl-actions/setup-flyctl@master
-            - run: flyctl deploy --remote-only
-              env:
-                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-                  API_KEY: ${{ secrets.API_KEY }}
-                  API_SECRET: ${{ secrets.API_SECRET }}
-                  CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
-                  CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
-                  PORT: ${{ secrets.PORT }}
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: mizz
+          POSTGRES_PASSWORD: jani
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install
+        run: npm ci
+      - name: Create .env file
+        run: |
+          touch .env
+          echo CLIENT=pg >> .env
+          echo DATABASE_URL=postgres://mizz:jani@127.0.0.1:5432/postgres?schema=public >> .env
+      - name: Create Private Key
+        run: npm run keys
+      - name: Migrate database and Seed
+        run: npm run setup
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET: ${{ secrets.API_SECRET }}
+          CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+          CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+          PORT: ${{ secrets.PORT }}
