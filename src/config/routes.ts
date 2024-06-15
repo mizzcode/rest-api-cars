@@ -75,16 +75,6 @@ appRouter.get('/cars', mainController.searchCars)
  *                  type: string
  *                 updated_by:
  *                  type: string
- *      401:
- *        description: Unauthorized
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                message:
- *                  type: string
- *                  example: Invalid Token
  */
 apiRouter.get('/api/v1/cars', carsController.getCarAll)
 

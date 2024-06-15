@@ -13,6 +13,9 @@ $ npm install # install package
 ```
 $ docker compose up -d # run database
 $ docker compose down -v # delete database and the volume
+$ npm run setup # run migration, seeder
+$ npm run knex migrate:make migration_name # create new file migration
+$ npm run knex seed:make seed_name # create new file seeds
 ```
 
 ## Scripts
@@ -20,9 +23,6 @@ $ docker compose down -v # delete database and the volume
 ```
 $ npm run build # build typescript project
 $ npm run dev # run in development mode
-$ npm run setup # run migration, seeder
-$ npm run knex migrate:make migration_name # create new file migration
-$ npm run knex seed:make seed_name # create new file seeds
 $ npm run keys # create private and public key jwt # !! no passphrase !!
 ```
 
@@ -42,6 +42,7 @@ $ npm run keys # create private and public key jwt # !! no passphrase !!
 ![image](https://github.com/mizzcode/rest-api-cars/assets/101040281/7602d2ad-48e8-4a27-bda3-de4bc9f06361)
 
 # Docs APIs
+
 - Method : GET
 - Endpoint : `/docs`
 

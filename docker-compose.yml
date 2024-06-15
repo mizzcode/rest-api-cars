@@ -1,22 +1,22 @@
 version: '3.8'
 services:
-    postgres:
-        image: postgres
-        environment:
-            - POSTGRES_USER=mizz
-            - POSTGRES_PASSWORD=mizz
-            - POSTGRES_DB=binar-car-rental
-        ports:
-            - 5432:5432
-        volumes:
-            - pgdata:/var/lib/postgresql/data
-    pgadmin:
-        image: dpage/pgadmin4
-        environment:
-            - PGADMIN_DEFAULT_EMAIL=mizz@mizz.com
-            - PGADMIN_DEFAULT_PASSWORD=mizz
-        ports:
-            - '5000:80'
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=mizz
+      - POSTGRES_PASSWORD=mizz
+      - POSTGRES_DB=binar-car-rental
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=mizz@mizz.com
+      - PGADMIN_DEFAULT_PASSWORD=mizz
+    ports:
+      - '5000:80'
 
 volumes:
-    pgdata:
+  pgdata:
